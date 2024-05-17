@@ -111,17 +111,16 @@
         }
 
         function loadEmojis(emojis) {
-            let altColor = true;
-
+            // let altColor = true;
             let emojisDiv = document.querySelector('#emojis');
             for (var property of emojis) {
                 let card = document.createElement('div');
                 card.id = "div-" + property[0].toString();
                 card.className = "emoji";
-                if (altColor) {
-                    card.className += " dark";
-                    altColor = false;
-                } else { altColor = true; }
+                //if (altColor) {
+                //    card.className += " dark";
+                //    altColor = false;
+                //} else { altColor = true; }
                 let item = document.createElement('img');
                 let code = property[0];
                 item.id = code;

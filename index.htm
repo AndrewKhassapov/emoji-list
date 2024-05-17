@@ -9,17 +9,18 @@
     <title>Emojis in GitHub</title>
     <style>
         :root {
-            --bg-color-bg: #eeffee;
+            --bg-color-w: #efe;
+            --bg-color-b: #333;
         }
 
         body {
             width: 100%;
             margin: 0 0 0 0;
             padding: 0 0 0 0;
-            overflow-x: hidden;
+            overflow-x: auto;
             overflow-y: auto;
             text-decoration: none;
-            background-color: var(--bg-color-bg);
+            background-color: var(--bg-color-w);
             scroll-behavior: smooth;
             font-family: Helvetica, Segoe, Segoe UI, Calibri, Candara, Arial, sans-serif;
         }
@@ -29,9 +30,6 @@
         }
 
         div#emojis {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
             color: #000;
 
         }
@@ -45,6 +43,13 @@
             display: inline-block;
         }
 
+        .dark {
+            background-color: var(--bg-color-b);
+        }
+
+        .light {
+            background-color: var(--bg-color-w);
+        }
 
         ul {
             list-style: none;
@@ -70,13 +75,18 @@
             padding: 1vh 1vw 1vh 1vw;
             color: #000;
         }
+
+        h2 {
+            font-size: clamp(5px, 2vw, 20px);
+            padding: 1vh 1vw 1vh 1vw;
+        }
     </style>
 </head>
 
 <body>
     <h1>Emojis list from <a id="a-api"></a></h1>
-    <p>Hover/click an icon to display emoji code.</p>
-    <p>Search: <input oninput="filterEmojis(this.value)"></input></p>
+    <h2>Hover/click an icon to display emoji code.</h2>
+    <h2>Search: <input oninput="filterEmojis(this.value)"></input></h2>
     <div id="emojis"></div>
     <script>
         const urlapi = "https://api.github.com/emojis";

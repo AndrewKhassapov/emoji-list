@@ -21,6 +21,7 @@
             overflow-y: auto;
             text-decoration: none;
             background-color: var(--bg-color-w);
+            color: #000;
             scroll-behavior: smooth;
             font-family: Helvetica, Segoe, Segoe UI, Calibri, Candara, Arial, sans-serif;
         }
@@ -79,6 +80,7 @@
         h2 {
             font-size: clamp(5px, 2vw, 20px);
             padding: 1vh 1vw 1vh 1vw;
+            color: #000;
         }
     </style>
 </head>
@@ -109,11 +111,17 @@
         }
 
         function loadEmojis(emojis) {
+            let altColor = true;
+
             let emojisDiv = document.querySelector('#emojis');
             for (var property of emojis) {
                 let card = document.createElement('div');
                 card.id = "div-" + property[0].toString();
                 card.className = "emoji";
+                if (altColor) {
+                    card.className += " dark";
+                    altColor = false;
+                } else { altColor = true; }
                 let item = document.createElement('img');
                 let code = property[0];
                 item.id = code;

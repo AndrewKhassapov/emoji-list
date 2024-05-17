@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Emojis in GitHub</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        img {
+            height: 2em;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Emojis list from <a></a></h1>
+    <p>Hover/click an icon to display emoji code. You can filter them: <input
+            oninput="filterEmojis(this.value)"></input></p>
+    <div id="emojis"></div>
+    <script>
+        var url = "https://api.github.com/emojis";
+        document.querySelector('a').href = url;
+        document.querySelector('a').textContent = url;
+
+        var emojis;
+        window.onload = () => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    emojis = Object.entries(JSON.parse(this.response));
+                    loadEmojis(emojis);
+                }
+            };
+            xhttp.onerror = e => console.error('Error in xhttpReq: ' + e);
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+
+        function loadEmojis(emojis) {
+            let emojisDiv = document.querySelector('#emojis');
+            for (var property of emojis) {
+                let item = document.createElement('img');
+                let code = property[0];
+                item.id = code;
+                item.src = property[1];
+                item.title = ':' + code + ':';
+                item.onclick = () => alert(':' + code + ':');
+                emojisDiv.appendChild(item);
+            }
+        }
+
+        function filterEmojis(filter) {
+            let v = [];
+            emojis.filter(e => e[0].includes(filter)).forEach(e => v.push(e[0]));
+            document.querySelectorAll('#emojis img').forEach(i => i.className = (v.indexOf(i.id) == -1) ? "hide" : "");
+        }
+    </script>
+</body>
+
+</html>

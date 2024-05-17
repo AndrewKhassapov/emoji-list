@@ -24,7 +24,7 @@
             font-family: Helvetica, Segoe, Segoe UI, Calibri, Candara, Arial, sans-serif;
         }
 
-        .img {
+        img {
             height: 2em;
         }
 
@@ -71,8 +71,8 @@
     <div id="emojis"></div>
     <script>
         const urlapi = "https://api.github.com/emojis";
-        document.querySelector('a-api').href = urlapi;
-        document.querySelector('a-api').textContent = urlapi;
+        document.querySelector('#a-api').href = urlapi;
+        document.querySelector('#a-api').textContent = urlapi;
 
         var emojis;
 

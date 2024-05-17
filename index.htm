@@ -33,9 +33,14 @@
             text-decoration: none;
             margin: 0 0 0 0;
             padding: 0 0 0 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
         }
 
-        div#emojis {}
+        div#emojis {
+            color: #000;
+        }
 
         ul {
             list-style: none;
@@ -56,9 +61,9 @@
 
         h1 {
             font-family: Verdana, Geneva, sans-serif;
-            font-size: clamp(20px, 10vw, 60px);
+            font-size: clamp(10px, 5vw, 40px);
             margin: 0 0 0 0;
-            padding: 5vh 5vw 5vh 5vw;
+            padding: 1vh 1vw 1vh 1vw;
             color: #000;
         }
     </style>
@@ -92,13 +97,17 @@
         function loadEmojis(emojis) {
             let emojisDiv = document.querySelector('#emojis');
             for (var property of emojis) {
+                let card = document.createElement('div');
+                card.id = "div-" + property[0].toString();
+                card.className = "emoji";
                 let item = document.createElement('img');
                 let code = property[0];
                 item.id = code;
                 item.src = property[1];
                 item.title = ':' + code + ':';
                 item.onclick = () => alert(':' + code + ':');
-                emojisDiv.appendChild(item);
+                card.appendChild(item);
+                emojisDiv.appendChild(card);
             }
         }
 

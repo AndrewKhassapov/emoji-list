@@ -24,9 +24,18 @@
             font-family: Helvetica, Segoe, Segoe UI, Calibri, Candara, Arial, sans-serif;
         }
 
-        .emoji {
+        .img {
             height: 2em;
         }
+
+        .emoji {
+            height: 2em;
+            text-decoration: none;
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+        }
+
+        div#emojis {}
 
         ul {
             list-style: none;
@@ -61,9 +70,9 @@
     <p>Search: <input oninput="filterEmojis(this.value)"></input></p>
     <div id="emojis"></div>
     <script>
-        const url_api = "https://api.github.com/emojis";
-        document.querySelector('a-api').href = url_api;
-        document.querySelector('a-api').textContent = url_api;
+        const urlapi = "https://api.github.com/emojis";
+        document.querySelector('a-api').href = urlapi;
+        document.querySelector('a-api').textContent = urlapi;
 
         var emojis;
 
@@ -76,7 +85,7 @@
                 }
             };
             xhttp.onerror = e => console.error('Error in xhttpReq: ' + e);
-            xhttp.open("GET", url_api, true);
+            xhttp.open("GET", urlapi, true);
             xhttp.send();
         }
 

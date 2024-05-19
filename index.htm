@@ -91,6 +91,7 @@
     <h2>Search: <input oninput="filterEmojis(this.value)"></input></h2>
     <div id="emojis"></div>
     <script>
+        // TODO: Replace AJAX with async await function
         const urlapi = "https://api.github.com/emojis";
         document.querySelector('#a-api').href = urlapi;
         document.querySelector('#a-api').textContent = urlapi;
@@ -134,7 +135,7 @@
 
         function filterEmojis(filter) {
             let v = [];
-            emojis.filter(e => e[0].includes(filter)).forEach(e => v.push(e[0]));
+            emojis.filter(e => e[0].includes(filter.toLowerCase())).forEach(e => v.push(e[0]));
             document.querySelectorAll('#emojis img').forEach(i => i.className = (v.indexOf(i.id) == -1) ? "hide" : "");
         }
     </script>

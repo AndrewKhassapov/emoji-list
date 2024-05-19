@@ -35,6 +35,20 @@
 
         }
 
+        div#emojiselect {
+            display: absolute;
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            min-width: 4em;
+            width: 10vw;
+            max-width: 20em;
+            min-height: 250px;
+            height: 20vh;
+            max-height: 500px;
+            background-color: #222;
+        }
+
         .emoji {
             height: 2em;
             min-width: 0;
@@ -89,6 +103,7 @@
     <h1>Emojis list from <a id="a-api"></a></h1>
     <h2>Hover/click an icon to display emoji code.</h2>
     <h2>Search: <input oninput="filterEmojis(this.value)"></input></h2>
+    <div id="emojiselect"></div>
     <div id="emojis"></div>
     <script>
         // TODO: Replace AJAX with async await function

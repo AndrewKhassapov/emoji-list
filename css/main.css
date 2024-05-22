@@ -52,10 +52,10 @@ div#emojiselect {
   margin-left: auto;
   margin-right: auto;
   border-radius: 20px;
-  min-width: 4em;
+  min-width: 100px;
   width: 40vw;
   max-width: 200em;
-  min-height: 100px;
+  min-height: 180px;
   height: 25vh;
   max-height: 400px;
   background-color: light-dark(var(--bg-color-b), var(--bg-color-w));
@@ -111,7 +111,8 @@ div#emojiselected {
   font-size: 20px;
   justify-content: center;
   line-height: 1em;
-  width: 140px;
+  width: 90%;
+  max-width: 140px;
   height: 50px;
   padding: 1em;
   text-decoration: none;

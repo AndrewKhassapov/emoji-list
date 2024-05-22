@@ -24,6 +24,21 @@ input {
   border-radius: 20px;
 }
 
+.nav-menu {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+}
+
+.nav-link {
+  position: static;
+  overflow: hidden;
+  z-index: 1;
+  padding: 2vh 2vw 2vh 2vw;
+}
+
 div#emojis {
   color: #000;
 }
@@ -69,7 +84,7 @@ div#emojiselected {
   padding-top: 1vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-content: center;
   overflow-x: hidden;
 }
@@ -87,14 +102,15 @@ div#emojiselected {
   height: 2em;
   min-width: 0;
   text-decoration: none;
-  padding: 1vh 1vw 1vh 1vw;
+  padding: 1vh 1vw 0vh 1vw;
   margin: 0px auto;
 }
 
 #emojiselected > p {
-  font-size: clamp(12px, 2.5vw, 20px);
-  padding: 1vh 1vw 1vh 1vw;
+  font-size: clamp(18px, 4vw, 24px);
+  padding: 0vh 1vw 0vh 1vw;
   text-align: center;
+  word-wrap: break-word;
   color: light-dark(#efe, #000);
 }
 
@@ -114,7 +130,7 @@ div#emojiselected {
   width: 90%;
   max-width: 140px;
   height: 50px;
-  padding: 1em;
+  padding: 1vh 1vw 1vh 1vw;
   text-decoration: none;
   user-select: none;
   -webkit-user-select: none;
@@ -158,14 +174,14 @@ p {
 
 h1 {
   font-family: Verdana, Geneva, sans-serif;
-  font-size: clamp(10px, 5vw, 40px);
+  font-size: clamp(14px, 5vw, 40px);
   margin: 0 0 0 0;
   padding: 1vh 1vw 1vh 1vw;
   color: light-dark(#000, #efe);
 }
 
 h2 {
-  font-size: clamp(8px, 2.5vw, 30px);
+  font-size: clamp(12px, 4vw, 30px);
   padding: 1vh 1vw 1vh 1vw;
   color: light-dark(#000, #efe);
 }

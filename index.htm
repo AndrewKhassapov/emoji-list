@@ -12,11 +12,11 @@
 </head>
 
 <body>
-    <h1>Emojis list from <a id="a-api"></a></h1>
-    <h2>Hover/click an icon to display emoji code.</h2>
+    <h1>Emoji list from <a id="a-api"></a></h1>
+    <h2>Hover / click an icon to display emoji code.</h2>
 
     <!-- <img alt="Search" src="img/search-full.svg" width="40px" title="Search"> //-->
-    <h2>Search: <input oninput="filterEmojis(this.value)"></input></h2>
+    <h2>Search: <input type="text" oninput="filterEmojis(this.value)"></input></h2>
 
 
     <div id="msgcontainer" class="hide unclickable">
@@ -34,7 +34,7 @@
 
         var emojis;
 
-        window.onload = () => {
+        /*window.onload = () => {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -45,18 +45,34 @@
             xhttp.onerror = e => console.error('Error in xhttpReq: ' + e);
             xhttp.open("GET", urlapi, true);
             xhttp.send();
+        }*/
+
+        window.onload = async function loadAsync() {
+            /** Note on performance, fetch vs. AJAX showed similar speeds with
+            * 820ms initial load times
+            * 430ms cached load times
+            * Fetch preferred as it is modern
+            */
+            try {
+                const response = await fetch(urlapi);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                emojis = Object.entries(data);
+                loadEmojis(emojis);
+            } catch (error) {
+                console.error('Error in fetch request:', error);
+            }
         }
 
         function messageEmoji(id, source) {
-
-            console.log(id, source);
             const divMsg = document.querySelector("#emojiselect");
             const divMsgBox = document.querySelector("#msgcontainer");
             const divMsgInner = document.querySelector("#emojiselected");
 
             divMsg.className = "show clickable";
             divMsgBox.className = "show clickable";
-
             divMsgInner.innerHTML = "";
             let code = id;
             let src = source;
@@ -87,7 +103,6 @@
             divMsgBox.className = "hide unclickable";
             divMsgInner.innerHTML = "";
         }
-
 
 
         function loadEmojis(emojis) {

@@ -180,6 +180,12 @@ h1 {
   color: light-dark(#000, #efe);
 }
 
+input[type="text"] {
+  font-size: clamp(8px, 2.5vw, 24px);
+  padding: 0.5vh 1vw 0.5vh 1vw;
+  color: light-dark(#000, #efe);
+}
+
 h2 {
   font-size: clamp(12px, 4vw, 30px);
   padding: 1vh 1vw 1vh 1vw;

@@ -35,19 +35,48 @@
 
         }
 
+        .unclickable {
+            pointer-events: none;
+            background: none;
+        }
+
+        .clickable {
+            pointer-events: initial;
+        }
+
+        div#msgcontainer {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: top;
+            z-index: 100;
+        }
+
         div#emojiselect {
-            display: absolute;
-            position: absolute;
             margin-left: auto;
             margin-right: auto;
+            border-radius: 20px;
             min-width: 4em;
-            width: 10vw;
-            max-width: 20em;
-            min-height: 250px;
-            height: 20vh;
-            max-height: 500px;
+            width: 40vw;
+            max-width: 200em;
+            min-height: 100px;
+            height: 25vh;
+            max-height: 400px;
             background-color: #222;
+            z-index: 101;
         }
+
+        div#emojiselected {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+
 
         .emoji {
             height: 2em;
@@ -57,6 +86,62 @@
             margin: 0px auto;
             display: inline-block;
         }
+
+        #emojiselected>img {
+            height: 2em;
+            min-width: 0;
+            text-decoration: none;
+            padding: 1vh 1vw 1vh 1vw;
+            margin: 0px auto;
+        }
+
+        #emojiselected>button {
+            align-items: center;
+            /*background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);*/
+            background-color: rgb(119, 190, 231);
+            border: 0;
+            border-radius: 8px;
+            box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            display: flex;
+            font-family: Phantomsans, sans-serif;
+            font-size: 20px;
+            justify-content: center;
+            line-height: 1em;
+            width: 140px;
+            height: 50px;
+            padding: 3px;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            cursor: pointer;
+            margin-top: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #emojiselected>button:active,
+        #emojiselected>button:hover {
+            outline: 0;
+        }
+
+        #emojiselected>button span {
+            background-color: rgb(5, 6, 45);
+            padding: 16px 24px;
+            border-radius: 6px;
+            width: 100%;
+            height: 100%;
+            transition: 300ms;
+        }
+
+        #emojiselected>button:hover span {
+            background: none;
+        }
+
+
 
         .dark {
             background-color: var(--bg-color-b);
@@ -71,7 +156,12 @@
             margin: 0 0 0 0;
         }
 
+        .show {
+            visibility: visible;
+        }
+
         .hide {
+            visibility: none;
             display: none;
         }
 
@@ -96,6 +186,13 @@
             padding: 1vh 1vw 1vh 1vw;
             color: #000;
         }
+
+        #emojiselected>p {
+            font-size: clamp(8px, 2.5vw, 20px);
+            padding: 1vh 1vw 1vh 1vw;
+            text-align: center;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -103,7 +200,13 @@
     <h1>Emojis list from <a id="a-api"></a></h1>
     <h2>Hover/click an icon to display emoji code.</h2>
     <h2>Search: <input oninput="filterEmojis(this.value)"></input></h2>
-    <div id="emojiselect"></div>
+
+    <div id="msgcontainer" class="hide unclickable">
+        <div id="emojiselect" class="hide unclickable">
+            <div id="emojiselected"></div>
+        </div>
+    </div>
+
     <div id="emojis"></div>
     <script>
         // TODO: Replace AJAX with async await function
@@ -126,6 +229,49 @@
             xhttp.send();
         }
 
+        function messageEmoji(id, source) {
+
+            console.log(id, source);
+            const divMsg = document.querySelector("#emojiselect");
+            const divMsgBox = document.querySelector("#msgcontainer");
+            const divMsgInner = document.querySelector("#emojiselected");
+
+            divMsg.className = "show clickable";
+            divMsgBox.className = "show clickable";
+
+            divMsgInner.innerHTML = "";
+            let code = id;
+            let src = source;
+            let item = document.createElement('img');
+            item.id = id;
+            item.src = source;
+            item.title = ':' + id + ':';
+
+            let text = document.createElement('p');
+            text.textContent = ":" + code + ":";
+
+            let btn = document.createElement('button');
+            btn.textContent = "OK";
+            btn.onclick = () => {
+                unmessageEmojis();
+            }
+
+            divMsgInner.appendChild(item);
+            divMsgInner.appendChild(text);
+            divMsgInner.appendChild(btn);
+        }
+
+        function unmessageEmojis() {
+            const divMsg = document.querySelector("#emojiselect");
+            const divMsgBox = document.querySelector("#msgcontainer");
+            const divMsgInner = document.querySelector("#emojiselected");
+            divMsg.className = "hide unclickable";
+            divMsgBox.className = "hide unclickable";
+            divMsgInner.innerHTML = "";
+        }
+
+
+
         function loadEmojis(emojis) {
             // let altColor = true;
             let emojisDiv = document.querySelector('#emojis');
@@ -133,19 +279,22 @@
                 let card = document.createElement('div');
                 card.id = "div-" + property[0].toString();
                 card.className = "emoji";
-                //if (altColor) {
+
+                //if (altColor) { //  Checkerbox effect
                 //    card.className += " dark";
                 //    altColor = false;
                 //} else { altColor = true; }
+
                 let item = document.createElement('img');
                 let code = property[0];
                 item.id = code;
                 item.src = property[1];
                 item.title = ':' + code + ':';
-                item.onclick = () => alert(':' + code + ':');
+                item.onclick = () => messageEmoji(item.id, item.src); // alert(':' + code + ':');
                 card.appendChild(item);
                 emojisDiv.appendChild(card);
             }
+            unmessageEmojis();
         }
 
         function filterEmojis(filter) {

@@ -4,91 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#333333">
-    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eeffee" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#333333" />
+    <meta name="color-scheme" content="light dark" />
     <title>Emojis in GitHub</title>
-    <style>
-        :root {
-            --bg-color-w: #efe;
-            --bg-color-b: #333;
-        }
-
-        body {
-            width: 100%;
-            margin: 0 0 0 0;
-            padding: 0 0 0 0;
-            overflow-x: auto;
-            overflow-y: auto;
-            text-decoration: none;
-            background-color: var(--bg-color-w);
-            color: #000;
-            scroll-behavior: smooth;
-            font-family: Helvetica, Segoe, Segoe UI, Calibri, Candara, Arial, sans-serif;
-        }
-
-        img {
-            height: 2em;
-        }
-
-        div#emojis {
-            color: #000;
-
-        }
-
-        .emoji {
-            height: 2em;
-            min-width: 0;
-            text-decoration: none;
-            padding: 0 0 0 0;
-            margin: 0px auto;
-            display: inline-block;
-        }
-
-        .dark {
-            background-color: var(--bg-color-b);
-        }
-
-        .light {
-            background-color: var(--bg-color-w);
-        }
-
-        ul {
-            list-style: none;
-            margin: 0 0 0 0;
-        }
-
-        .hide {
-            display: none;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        p {
-            color: #000;
-        }
-
-        h1 {
-            font-family: Verdana, Geneva, sans-serif;
-            font-size: clamp(10px, 5vw, 40px);
-            margin: 0 0 0 0;
-            padding: 1vh 1vw 1vh 1vw;
-            color: #000;
-        }
-
-        h2 {
-            font-size: clamp(7.5px, 2.5vw, 30px);
-            padding: 1vh 1vw 1vh 1vw;
-            color: #000;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 
 <body>
     <h1>Emojis list from <a id="a-api"></a></h1>
     <h2>Hover/click an icon to display emoji code.</h2>
     <h2>Search: <input oninput="filterEmojis(this.value)"></input></h2>
+
+    <div id="msgcontainer" class="hide unclickable">
+        <div id="emojiselect" class="hide unclickable">
+            <div id="emojiselected"></div>
+        </div>
+    </div>
+
     <div id="emojis"></div>
     <script>
         // TODO: Replace AJAX with async await function
@@ -111,6 +44,49 @@
             xhttp.send();
         }
 
+        function messageEmoji(id, source) {
+
+            console.log(id, source);
+            const divMsg = document.querySelector("#emojiselect");
+            const divMsgBox = document.querySelector("#msgcontainer");
+            const divMsgInner = document.querySelector("#emojiselected");
+
+            divMsg.className = "show clickable";
+            divMsgBox.className = "show clickable";
+
+            divMsgInner.innerHTML = "";
+            let code = id;
+            let src = source;
+            let item = document.createElement('img');
+            item.id = id;
+            item.src = source;
+            item.title = ':' + id + ':';
+
+            let text = document.createElement('p');
+            text.textContent = ":" + code + ":";
+
+            let btn = document.createElement('button');
+            btn.textContent = "OK";
+            btn.onclick = () => {
+                unmessageEmojis();
+            }
+
+            divMsgInner.appendChild(item);
+            divMsgInner.appendChild(text);
+            divMsgInner.appendChild(btn);
+        }
+
+        function unmessageEmojis() {
+            const divMsg = document.querySelector("#emojiselect");
+            const divMsgBox = document.querySelector("#msgcontainer");
+            const divMsgInner = document.querySelector("#emojiselected");
+            divMsg.className = "hide unclickable";
+            divMsgBox.className = "hide unclickable";
+            divMsgInner.innerHTML = "";
+        }
+
+
+
         function loadEmojis(emojis) {
             // let altColor = true;
             let emojisDiv = document.querySelector('#emojis');
@@ -118,19 +94,22 @@
                 let card = document.createElement('div');
                 card.id = "div-" + property[0].toString();
                 card.className = "emoji";
-                //if (altColor) {
+
+                //if (altColor) { //  Checkerbox effect
                 //    card.className += " dark";
                 //    altColor = false;
                 //} else { altColor = true; }
+
                 let item = document.createElement('img');
                 let code = property[0];
                 item.id = code;
                 item.src = property[1];
                 item.title = ':' + code + ':';
-                item.onclick = () => alert(':' + code + ':');
+                item.onclick = () => messageEmoji(item.id, item.src); // alert(':' + code + ':');
                 card.appendChild(item);
                 emojisDiv.appendChild(card);
             }
+            unmessageEmojis();
         }
 
         function filterEmojis(filter) {

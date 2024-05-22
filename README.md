@@ -22,8 +22,9 @@
 <br/><br/>
 ## 🌈 Resources
 
-This project was inspired by rxavier’s _[No longer updated Complete list of github markdown emoji markup](https://gist.github.com/rxaviers/7360908)_
-Display based on [Awes0mem4n List](https://awes0mem4n.github.io/emojis-github.html)
+This project was inspired by rxavier’s _[No longer updated Complete list of github markdown emoji markup](https://gist.github.com/rxaviers/7360908)_.
+
+Display based on [Awes0mem4n List](https://awes0mem4n.github.io/emojis-github.html) and modernized.
 
 Other Emoji Lists:
 

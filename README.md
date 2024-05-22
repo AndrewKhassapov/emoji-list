@@ -14,7 +14,7 @@
 - [x] Update images to responsive <div> cards ✔️
 - [x] Update search to be case-insensitive ✔️
 - [x] Add checkerbox effect. Not implemented. ✔️✖️
-- [x] Update message box to responsive <div>
+- [x] Update message box to responsive <div> ✔️
 - [ ] Update AJAX HTTPx request with javascript asynx/await if more efficient
 - [ ] Add light mode and dark mode button
 - [ ] Add links to external resources

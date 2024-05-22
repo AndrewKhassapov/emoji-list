@@ -1,44 +1,170 @@
-/* Variables */
 :root {
-  --mobile-width: 760px;
-  --card-size: 320px;
-  --nav-height: 50px;
-  --emoji-height: 2em;
-  --bg-color-nav: #0f0064;
-  --bg-color-bg: #eeffee;
-  --color-glow-teal: #58ffb9;
-  --color-glow-blue: #70f3ff;
-  --color-point: #00eeff;
+  --bg-color-w: #efe;
+  --bg-color-b: #333;
 }
-/* Elements */
+
 body {
   width: 100%;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: auto;
   text-decoration: none;
-  background-color: var(--bg-color-bg);
+  background-color: light-dark(var(--bg-color-w), var(--bg-color-b));
+  color: light-dark(#fff, #000);
   scroll-behavior: smooth;
   font-family: Helvetica, Segoe, Segoe UI, Calibri, Candara, Arial, sans-serif;
 }
+
+img {
+  height: 2em;
+}
+
+input {
+  border-radius: 20px;
+}
+
+div#emojis {
+  color: #000;
+}
+
+.unclickable {
+  pointer-events: none;
+  background: none;
+}
+
+.clickable {
+  pointer-events: initial;
+}
+
+div#msgcontainer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  z-index: 100;
+}
+
+div#emojiselect {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  min-width: 4em;
+  width: 40vw;
+  max-width: 200em;
+  min-height: 100px;
+  height: 25vh;
+  max-height: 400px;
+  background-color: light-dark(var(--bg-color-b), var(--bg-color-w));
+  border-color: light-dark(#ccc, #000);
+  z-index: 101;
+  box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+div#emojiselected {
+  padding-top: 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-content: center;
+  overflow-x: hidden;
+}
+
+.emoji {
+  height: 2em;
+  min-width: 0;
+  text-decoration: none;
+  padding: 0 0 0 0;
+  margin: 0px auto;
+  display: inline-block;
+}
+
+#emojiselected > img {
+  height: 2em;
+  min-width: 0;
+  text-decoration: none;
+  padding: 1vh 1vw 1vh 1vw;
+  margin: 0px auto;
+}
+
+#emojiselected > p {
+  font-size: clamp(12px, 2.5vw, 20px);
+  padding: 1vh 1vw 1vh 1vw;
+  text-align: center;
+  color: light-dark(#efe, #000);
+}
+
+#emojiselected > button {
+  align-items: center;
+  /*background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);*/
+  background-color: light-dark(#acf1f1, rgb(24, 88, 131));
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: light-dark(#000, #fff);
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  width: 140px;
+  height: 50px;
+  padding: 1em;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dark {
+  background-color: var(--bg-color-b);
+}
+
+.light {
+  background-color: var(--bg-color-w);
+}
+
 ul {
   list-style: none;
   margin: 0 0 0 0;
 }
+
+.show {
+  visibility: visible;
+}
+
+.hide {
+  visibility: none;
+  display: none;
+}
+
 a {
   text-decoration: none;
 }
+
 p {
-  color: #fff;
+  color: light-dark(#000, #efe);
 }
+
 h1 {
   font-family: Verdana, Geneva, sans-serif;
-  font-size: clamp(20px, 10vw, 60px);
+  font-size: clamp(10px, 5vw, 40px);
   margin: 0 0 0 0;
-  padding: 5vh 5vw 5vh 5vw;
-  color: #fff;
+  padding: 1vh 1vw 1vh 1vw;
+  color: light-dark(#000, #efe);
 }
-h2,
-label {
+
+h2 {
+  font-size: clamp(8px, 2.5vw, 30px);
+  padding: 1vh 1vw 1vh 1vw;
+  color: light-dark(#000, #efe);
 }

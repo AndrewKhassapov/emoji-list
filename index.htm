@@ -17,13 +17,21 @@
 
     <div class="nav-menu">
         <div class="nav-link">
-            <img alt="Search" src="img/search-full.svg" width="40px" title="Search">
+            <picture>
+                <source srcset="img/search-light.svg" media="(prefers-color-scheme: dark)" width="40px">
+                <img src="img/search-full.svg" alt="Search" width="40px" title="Search">
+            </picture>
             <h2>Search: <input title="Search Emojis" type="text" oninput="filterEmojis(this.value)">
                 </input>
             </h2>
         </div>
         <div class="nav-link">
-            <img alt="Home" src="img/github-mark-full.svg" width="40px" title="Go to GitHub">
+            <a id="nav-github" href="https://github.com/AndrewKhassapov" target="_self">
+                <picture>
+                    <source srcset="img/github-mark-light.svg" media="(prefers-color-scheme: dark)" width="40px">
+                    <img src="img/github-mark-full.svg" alt="GitHub" width="40px" title="Go to GitHub">
+                </picture>
+            </a>
         </div>
     </div>
 

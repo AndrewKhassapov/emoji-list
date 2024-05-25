@@ -15,8 +15,25 @@
     <h1>Emoji list from <a id="a-api"></a></h1>
     <h2>Hover / click an icon to display emoji code.</h2>
 
-    <!-- <img class="emoji" alt="Search" src="img/search-full.svg" width="40px" title="Search"> //-->
-    <h2>Search: <input type="text" oninput="filterEmojis(this.value)"></input></h2>
+    <div class="nav-menu">
+        <div class="nav-link">
+            <picture>
+                <source srcset="img/search-light.svg" media="(prefers-color-scheme: dark)" width="40px">
+                <img src="img/search-full.svg" alt="Search" width="40px" title="Search">
+            </picture>
+            <h2>Search: <input title="Search Emojis" type="text" oninput="filterEmojis(this.value)">
+                </input>
+            </h2>
+        </div>
+        <div class="nav-link">
+            <a id="nav-github" href="https://github.com/AndrewKhassapov" target="_self">
+                <picture>
+                    <source srcset="img/github-mark-light.svg" media="(prefers-color-scheme: dark)" width="40px">
+                    <img src="img/github-mark-full.svg" alt="GitHub" width="40px" title="Go to GitHub">
+                </picture>
+            </a>
+        </div>
+    </div>
 
     <div id="msgcontainer" class="hide unclickable">
         <div id="emojiselect" class="hide unclickable">

@@ -25,18 +25,34 @@ input {
 }
 
 .nav-menu {
-  justify-content: space-between;
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
   width: 100%;
 }
 
 .nav-link {
-  position: static;
   overflow: hidden;
   z-index: 1;
-  padding: 2vh 2vw 2vh 2vw;
+  min-height: 2em;
+  min-width: 0;
+  text-decoration: none;
+  padding: 0 1vw 0 1vw;
+  margin: 0;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.unpad {
+  padding: 0 0 0 0;
+}
+
+.unmargin {
+  margin: 0 0 0 0;
 }
 
 div#emojis {
@@ -175,7 +191,7 @@ p {
 h1 {
   font-family: Verdana, Geneva, sans-serif;
   font-size: clamp(14px, 5vw, 40px);
-  margin: 0 0 0 0;
+  margin-block: 0.5em;
   padding: 1vh 1vw 1vh 1vw;
   color: light-dark(#000, #efe);
 }
@@ -188,6 +204,7 @@ input[type="text"] {
 
 h2 {
   font-size: clamp(12px, 4vw, 30px);
+  margin-block: 0.25em;
   padding: 1vh 1vw 1vh 1vw;
   color: light-dark(#000, #efe);
 }

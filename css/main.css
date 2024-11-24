@@ -71,11 +71,11 @@ div#emojis {
 div#msgcontainer {
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: top;
+  justify-content: flex-start;
   z-index: 100;
 }
 
